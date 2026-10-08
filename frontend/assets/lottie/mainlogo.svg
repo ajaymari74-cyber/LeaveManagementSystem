@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Meta/Google style vibrant gradient -->
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4285F4" />
+      <stop offset="35%" stop-color="#6C5CE7" />
+      <stop offset="70%" stop-color="#00C9A7" />
+      <stop offset="100%" stop-color="#34A853" />
+    </linearGradient>
+
+    <!-- Background card gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#4285F4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Rounded App Icon Background -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGradient)"/>
+
+  <!-- Geometric Emblem: Combined Calendar + Departure/Check Loop -->
+  <g filter="url(#glow)">
+    <!-- Base Ribbon Loop (Meta geometric loop style) -->
+    <path 
+      d="M140 220 C 140 160, 190 130, 256 130 C 322 130, 372 160, 372 220 C 372 290, 290 320, 230 350 C 185 372, 140 380, 140 380 C 140 380, 180 340, 210 300 C 250 250, 320 220, 320 180 C 320 160, 295 150, 256 150 C 205 150, 168 180, 168 220 Z" 
+      fill="url(#primaryGradient)" 
+      opacity="0.25"
+    />
+
+    <!-- Main dynamic continuous strand -->
+    <path 
+      d="M150 280 C 130 200, 190 140, 260 140 C 340 140, 380 205, 370 270 C 358 350, 260 370, 210 370 C 170 370, 140 355, 140 355" 
+      fill="none" 
+      stroke="url(#primaryGradient)" 
+      stroke-width="38" 
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- Checkmark / Takeoff Notch indicating leave approval -->
+    <path 
+      d="M210 260 L 255 305 L 365 175" 
+      fill="none" 
+      stroke="#FFFFFF" 
+      stroke-width="34" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
+  </g>
+</svg>

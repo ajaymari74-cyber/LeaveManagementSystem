@@ -1,0 +1,30 @@
+CREATE DATABASE IF NOT EXISTS leave_management;
+USE leave_management;
+
+DROP TABLE IF EXISTS leave_requests;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('EMPLOYEE','ADMIN') NOT NULL DEFAULT 'EMPLOYEE',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE leave_requests (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    leave_type ENUM('CASUAL','SICK','EMERGENCY') NOT NULL,
+    from_date DATE NOT NULL,
+    to_date DATE NOT NULL,
+    reason TEXT NOT NULL,
+    status ENUM('PENDING','APPROVED','REJECTED') NOT NULL DEFAULT 'PENDING',
+    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    decided_at TIMESTAMP NULL,
+    decided_by BIGINT NULL,
+    rejection_reason TEXT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (decided_by) REFERENCES users(id)
+);
