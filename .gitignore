@@ -34,3 +34,9 @@ ehthumbs.db
 
 # Logs & temp
 *.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+

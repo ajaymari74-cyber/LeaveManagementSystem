@@ -18,6 +18,16 @@ const server = http.createServer((req, res) => {
   let pathname = req.url.split('?')[0];
   if (pathname === '/' || pathname === '') pathname = '/index.html';
 
+  if (pathname === '/env.js' || pathname === '/config.js') {
+    const apiUrl = process.env.BACKEND_URL || process.env.API_URL || 'http://localhost:8080/api';
+    res.writeHead(200, {
+      'Content-Type': 'application/javascript',
+      'Cache-Control': 'no-cache'
+    });
+    res.end(`window.LMS_CONFIG = window.LMS_CONFIG || {}; window.LMS_CONFIG.apiUrl = "${apiUrl}";`);
+    return;
+  }
+
   const filePath = path.join(__dirname, pathname);
 
   fs.readFile(filePath, (err, content) => {
