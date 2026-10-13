@@ -57,8 +57,8 @@ function writeLocalLog(entry) {
   }
 }
 
-// POST /log — Primary audit logging endpoint
-app.post('/log', async (req, res) => {
+// POST /log & /audit/log — Primary audit logging endpoint
+app.post(['/log', '/audit/log'], async (req, res) => {
   const { userId, action, leaveId, timestamp, details } = req.body;
 
   if (!userId || !action || !leaveId) {
@@ -89,8 +89,8 @@ app.post('/log', async (req, res) => {
   return res.status(201).json({ success: true, log: logEntry });
 });
 
-// GET /logs — Retrieve all audit logs
-app.get('/logs', async (req, res) => {
+// GET /logs & /audit/logs — Retrieve all audit logs
+app.get(['/logs', '/audit/logs'], async (req, res) => {
   try {
     if (isMongoConnected && mongoCollection) {
       const logs = await mongoCollection.find().sort({ timestamp: -1 }).toArray();
@@ -102,8 +102,8 @@ app.get('/logs', async (req, res) => {
   return res.json(readLocalLogs());
 });
 
-// GET /logs/:leaveId — Filter logs by leave ID
-app.get('/logs/:leaveId', async (req, res) => {
+// GET /logs/:leaveId & /audit/logs/:leaveId — Filter logs by leave ID
+app.get(['/logs/:leaveId', '/audit/logs/:leaveId'], async (req, res) => {
   const leaveId = Number(req.params.leaveId);
   try {
     if (isMongoConnected && mongoCollection) {
@@ -117,8 +117,8 @@ app.get('/logs/:leaveId', async (req, res) => {
   return res.json(filtered);
 });
 
-// GET /health
-app.get('/health', (req, res) => {
+// GET /health & /audit/health
+app.get(['/health', '/audit/health'], (req, res) => {
   res.json({
     status: 'UP',
     mongoConnected: isMongoConnected,
@@ -126,6 +126,10 @@ app.get('/health', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Audit log service running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Audit log service running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
