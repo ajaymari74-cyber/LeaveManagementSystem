@@ -13,38 +13,15 @@ Leave_Management_System/
 ├── frontend/                     # All client-side web application code
 │   ├── assets/
 │   │   └── lottie/              # Branding logo, illustrations & animations
-│   │       ├── mainlogo.svg     # Brand logo
-│   │       ├── employee.png     # Employee portal illustration
-│   │       ├── admin.png        # Admin portal illustration
-│   │       ├── login-animation.json
-│   │       ├── empty-state.json
-│   │       └── success-check.json
 │   ├── css/
 │   │   └── style.css            # Custom CSS styling (curvy radius, design tokens)
-│   ├── js/
-│   │   ├── api.js               # Centralized HTTP request helper
-│   │   ├── auth.js              # Session & role-based route guard
-│   │   ├── ui.js                # Toast notifications & UI helpers
-│   │   ├── employee-login.js    # Employee authentication controller
-│   │   ├── employee-dashboard.js# Employee stats & recent leave list
-│   │   ├── apply-leave.js       # Leave application submission & validation
-│   │   ├── leave-history.js     # Filterable leave history & admin replies
-│   │   ├── admin-login.js       # Admin authentication controller
-│   │   ├── admin-dashboard.js   # Admin review, approve & reject with reasons
-│   │   └── leave-details.js     # Dedicated leave request inspection page
-│   ├── index.html               # Gateway redirect
-│   ├── employee-login.html      # Clean Employee sign-in screen
-│   ├── employee-dashboard.html  # Employee balance overview & recent requests
-│   ├── apply-leave.html         # Leave request submission form
-│   ├── leave-history.html       # Full leave application history table
-│   ├── admin-login.html         # Clean Administrator sign-in screen
-│   ├── admin-dashboard.html     # Admin management & decision board
-│   ├── leave-details.html       # Single leave application detail page
+│   ├── js/                      # Frontend JavaScript modules & controllers
+│   ├── *.html                   # UI page templates
 │   ├── package.json             # Frontend server package descriptor
 │   └── server.js                # Zero-dependency static server (port 3000)
 │
 ├── backend/                      # All server-side backend code
-│   ├── spring-boot/             # Primary REST API (Java 17 + Spring Boot 3.x)
+│   ├── spring-boot/             # Primary REST API (Java + Spring Boot 3.x)
 │   │   ├── src/                 # Controllers, Services, Repositories, DTOs, Models
 │   │   ├── pom.xml              # Maven project configuration
 │   │   ├── mvnw                 # Maven wrapper (Linux/macOS)
@@ -59,10 +36,22 @@ Leave_Management_System/
 │   ├── schema.sql               # MySQL table definitions
 │   └── data.sql                 # Initial seed accounts & sample records
 │
-├── screenshots/                 # Application screenshots & UI proof
-├── postman_collection.json      # API test collection
+├── docs/                         # Project guides, interview resources & API docs
+│   ├── Leave_Management_System_Interview_Guide.html
+│   ├── Leave_Management_System_Interview_Guide.pdf
+│   └── postman_collection.json
+│
+├── scripts/                      # Automated automation & monitoring scripts
+│   ├── start-all.ps1            # Automated one-shot launcher for all services
+│   └── check-services.ps1       # Comprehensive port & API health checker
+│
+├── screenshots/                 # Application UI screenshots & demonstrations
+├── start-all.bat                # Windows 1-click startup batch script
+├── check-services.bat           # Windows 1-click health check batch script
+├── package.json                 # Root npm project runner scripts
 ├── schema.sql                   # Root copy for convenience
 ├── data.sql                     # Root copy for convenience
+├── index.html                   # Gateway redirect to frontend
 └── README.md                    # Project documentation & setup manual
 ```
 
@@ -94,6 +83,29 @@ Both accounts are pre-seeded in the database with secure BCrypt hashes. Credenti
 ---
 
 ## 4. Quick Setup & Run Instructions
+
+### ⚡ Option A: One-Click Instant Startup (Windows)
+Simply run the included root launcher:
+```cmd
+start-all.bat
+```
+*(Or via PowerShell: `powershell -ExecutionPolicy Bypass -File .\scripts\start-all.ps1` or `npm start`)*
+This script automatically:
+1. Verifies that MySQL 8.0 is running on port 3306.
+2. Starts the Node.js Audit microservice on port 5000.
+3. Launches the Spring Boot backend on port 8080.
+4. Serves the Frontend on port 3000 and opens `http://localhost:3000` in your default browser.
+5. Runs a comprehensive health check.
+
+To verify system health anytime:
+```cmd
+check-services.bat
+```
+*(Or `npm run check`)*
+
+---
+
+### 🛠 Option B: Manual Step-by-Step Startup
 
 ### Step 1: Database Setup (MySQL)
 1. Ensure MySQL Server 8.0 is running on port `3306`.

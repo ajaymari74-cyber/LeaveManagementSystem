@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leave Management & Approval System - Interview Master Guide</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 14mm 12mm 14mm 12mm;
+      @bottom-right {
+        content: counter(page);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #1e293b;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Cover / Hero Header */
+    .hero {
+      background: linear-gradient(135deg, #1b0c36 0%, #441e8c 50%, #693bcc 100%);
+      color: #ffffff;
+      padding: 28px 24px;
+      border-radius: 14px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      margin: 0 0 6px 0;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      margin: 0;
+      font-size: 13.5px;
+      opacity: 0.92;
+      max-width: 650px;
+    }
+    .hero-meta {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 11.5px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 12px;
+    }
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Section Styling */
+    .section {
+      margin-bottom: 26px;
+      page-break-inside: auto;
+    }
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1e1b4b;
+      border-bottom: 2px solid #693bcc;
+      padding-bottom: 6px;
+      margin-top: 0;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title span.num {
+      background: #693bcc;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    /* Cards & Containers */
+    .card {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      background: #f8fafc;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      page-break-inside: avoid;
+    }
+    .card-highlight {
+      background: #faf5ff;
+      border-color: #d8b4fe;
+    }
+    .card-accent {
+      border-left: 4px solid #693bcc;
+    }
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #312e81;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 14px;
+      font-size: 12px;
+      page-break-inside: avoid;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #312e81;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-primary { background: #e0e7ff; color: #3730a3; }
+    .badge-success { background: #dcfce7; color: #166534; }
+    .badge-danger  { background: #fee2e2; color: #991b1b; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+
+    /* Code Blocks */
+    pre, code {
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 11px;
+    }
+    pre {
+      background: #0f172a;
+      color: #f1f5f9;
+      padding: 10px 14px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 8px 0;
+      page-break-inside: avoid;
+      line-height: 1.45;
+    }
+    code.inline {
+      background: #f1f5f9;
+      color: #693bcc;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 11.5px;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Script / Pitch Quotes */
+    .pitch-box {
+      background: #faf5ff;
+      border: 1.5px dashed #a855f7;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-style: normal;
+      color: #3b0764;
+      margin-bottom: 14px;
+      page-break-inside: avoid;
+    }
+    .pitch-box strong {
+      color: #581c87;
+    }
+
+    /* Q&A Items */
+    .qa-item {
+      margin-bottom: 14px;
+      padding: 12px 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #ffffff;
+      page-break-inside: avoid;
+    }
+    .qa-question {
+      font-weight: 700;
+      color: #1e1b4b;
+      font-size: 13px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .qa-qbadge {
+      background: #693bcc;
+      color: #ffffff;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .qa-answer {
+      color: #334155;
+      font-size: 12.2px;
+      line-height: 1.5;
+    }
+    .qa-answer strong {
+      color: #0f172a;
+    }
+
+    /* Grid columns */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+      page-break-inside: avoid;
+    }
+
+    /* Workflow Step */
+    .step-box {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #f8fafc;
+      margin-bottom: 8px;
+    }
+    .step-header {
+      font-weight: 700;
+      font-size: 12px;
+      color: #4338ca;
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      margin-top: 24px;
+      border-top: 1px solid #cbd5e1;
+      padding-top: 10px;
+      text-align: center;
+      font-size: 10.5px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER / HEADER -->
+  <div class="hero">
+    <div class="hero-badge">Official Interview Master Guide</div>
+    <h1>Leave Management & Approval System</h1>
+    <p>A comprehensive technical learning guide, architecture manual, workflow analysis, and 20+ interview questions with model answers for Full-Stack Developers.</p>
+    <div class="hero-meta">
+      <span><strong>Stack:</strong> Java 17 | Spring Boot 3 | Node.js Express | MySQL 8.0 | Bootstrap 5.3</span>
+      <span><strong>Architecture:</strong> Layered MVC REST API + Event Audit Microservice</span>
+      <span><strong>Role:</strong> Full-Stack Java Developer</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: ELEVATOR PITCH -->
+  <div class="section">
+    <h2 class="section-title"><span class="num">1</span> The 60-Second Interview Elevator Pitch</h2>
+    
+    <div class="pitch-box">
+      <strong>How to introduce this project with maximum confidence:</strong><br><br>
+      "I designed and engineered an enterprise-grade <strong>Leave Management & Approval System</strong> designed to streamline corporate leave lifecycles with strict Role-Based Access Control (RBAC) between <strong>Employees</strong> and <strong>Administrators</strong>.<br><br>
+      The core backend is built on <strong>Java 17 and Spring Boot 3</strong>, utilizing <strong>Spring Data JPA</strong> and <strong>MySQL 8.0</strong> with optimized JPQL queries to eliminate the N+1 select problem. For compliance and historical tracking, I integrated a secondary <strong>Node.js and Express audit microservice</strong> with dual persistence (MongoDB and a resilient local JSON fallback) triggered via non-blocking background threads.<br><br>
+      On the frontend, I developed a modern, responsive interface using <strong>HTML5, Bootstrap 5.3, and ES6 JavaScript</strong> with client-side route guards, custom design tokens, and Lottie animations. Key features include date conflict prevention, immutable state transitions, and a personalized rejection feedback loop where employees receive specific admin review replies."
+    </div>
+  </div>
+
+  <!-- SECTION 2: SYSTEM ARCHITECTURE & TECH STACK -->
+  <div class="section">
+    <h2 class="section-title"><span class="num">2</span> System Architecture & Tech Stack Justification</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Technology</th>
+          <th>Role in System</th>
+          <th>Why This Was Chosen (Interview Rationale)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Primary Backend</strong></td>
+          <td>Java 17, Spring Boot 3.x, Spring MVC</td>
+          <td>Port 8080. Core business logic, validation, authentication, and REST APIs.</td>
+          <td>Strong typing, enterprise scalability, declarative transaction handling (`@Transactional`), and built-in security tooling.</td>
+        </tr>
+        <tr>
+          <td><strong>Relational Database</strong></td>
+          <td>MySQL 8.0 + Spring Data JPA / Hibernate</td>
+          <td>Port 3306. Stores `users` and `leave_requests` tables with foreign keys.</td>
+          <td>ACID guarantees, strict relational foreign key constraints, and relational queries for employee and admin relationships.</td>
+        </tr>
+        <tr>
+          <td><strong>Audit Microservice</strong></td>
+          <td>Node.js, Express, MongoDB + JSON fallback</td>
+          <td>Port 5000. Append-only immutable event audit log (`/log`, `/logs`).</td>
+          <td>Decouples heavy logging from the transactional database. Document storage suits variable event schemas; non-blocking Node event loop handles fast logging.</td>
+        </tr>
+        <tr>
+          <td><strong>Frontend Client</strong></td>
+          <td>HTML5, Vanilla ES6 JS, Bootstrap 5.3</td>
+          <td>Port 3000. Interactive responsive portal for Employees and Admins.</td>
+          <td>Fast page rendering with zero complex build overhead; uses modern ES6 `async/await` and centralized fetch client with session credentials.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid-2">
+      <div class="card card-accent">
+        <h3>Primary Backend Architecture</h3>
+        <p style="margin: 0; font-size: 11.5px;">
+          Follows <strong>Strict Layered Architecture</strong>:
+          <br>• <strong>Controller:</strong> Handles HTTP mappings, JSON marshaling, role checks.
+          <br>• <strong>Service:</strong> Business rules, date validation, state checks, `@Transactional`.
+          <br>• <strong>Repository:</strong> Spring Data JPA with custom JPQL `JOIN FETCH` queries.
+          <br>• <strong>DTOs:</strong> Protect internal entities and avoid exposing password hashes.
+        </p>
+      </div>
+      <div class="card card-accent">
+        <h3>Resilient Inter-Service Communication</h3>
+        <p style="margin: 0; font-size: 11.5px;">
+          Spring Boot calls Node.js via <strong>asynchronous daemon threads</strong>:
+          <br>• Fires non-blocking HTTP POST requests to `http://localhost:5000/log`.
+          <br>• Prevents audit service slowdowns from blocking employee responses.
+          <br>• Node.js writes to MongoDB; if Mongo is offline, it safely saves to `audit_logs.json`.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: END-TO-END WORKFLOW -->
+  <div class="section">
+    <h2 class="section-title"><span class="num">3</span> Complete End-to-End Workflow</h2>
+
+    <div class="step-box">
+      <div class="step-header">Phase 1: Authentication & Role-Based Session Initialization</div>
+      <div style="font-size: 12px;">
+        1. User provides email & password at <code>/employee-login.html</code> or <code>/admin-login.html</code>.<br>
+        2. Frontend sends <code>POST /api/auth/login</code>.<br>
+        3. Backend hashes input with <strong>BCrypt</strong> and matches with database password hash.<br>
+        4. On success, user ID and Role are saved in <code>HttpSession</code>; a secure cookie <code>JSESSIONID</code> is sent to the browser.<br>
+        5. Frontend route guard (<code>auth.js</code>) verifies session with <code>GET /api/auth/me</code> and guards protected routes.
+      </div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">Phase 2: Leave Application (Employee Flow)</div>
+      <div style="font-size: 12px;">
+        1. Employee navigates to <strong>Apply Leave</strong> form.<br>
+        2. Client enforces validation: dates cannot be in the past; <code>toDate</code> must be equal to or after <code>fromDate</code>.<br>
+        3. Form dispatches <code>POST /api/leaves</code> with <code>credentials: 'include'</code>.<br>
+        4. Spring Boot verifies role is <code>EMPLOYEE</code>, validates payload, and saves record with initial status <code>PENDING</code>.<br>
+        5. Asynchronous background thread dispatches event <code>LEAVE_APPLIED</code> to the Node.js audit microservice.<br>
+        6. Employee dashboard updates live leave summary cards.
+      </div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">Phase 3: Decision & Rejection Feedback Loop (Admin Flow)</div>
+      <div style="font-size: 12px;">
+        1. Administrator logs into <strong>Admin Dashboard</strong>.<br>
+        2. Backend loads all records using <code>JOIN FETCH</code> to pull applicant data and decision metadata in a single query.<br>
+        3. <strong>Approval:</strong> Admin clicks 'Approve' &rarr; dispatches <code>PUT /api/leaves/{id}/approve</code> &rarr; updates status to <code>APPROVED</code>, stamps <code>decided_at</code> and <code>decided_by</code>.<br>
+        4. <strong>Rejection:</strong> Admin clicks 'Reject' &rarr; modal opens &rarr; admin types custom reply reason &rarr; dispatches <code>PUT /api/leaves/{id}/reject</code> with reason body.<br>
+        5. System verifies current status is <code>PENDING</code>; once finalized, decisions become immutable (HTTP 409 Conflict check).<br>
+        6. Employee views <strong>Leave History</strong> and instantly sees the dedicated red banner with the Admin's custom feedback.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: CORE CODE HIGHLIGHTS -->
+  <div class="section">
+    <h2 class="section-title"><span class="num">4</span> Key Code Concepts & Methods</h2>
+
+    <div class="card">
+      <h3>1. JPQL JOIN FETCH (Solving Hibernate N+1 Problem)</h3>
+      <p style="margin: 0 0 6px 0; font-size: 11.5px;">Located in <code>com.company.leave.repository.LeaveRepository</code>. Fetches employee user and deciding admin in one SQL JOIN:</p>
+<pre>@Query("SELECT l FROM LeaveRequest l " +
+       "JOIN FETCH l.user " +
+       "LEFT JOIN FETCH l.decidedBy " +
+       "WHERE l.user.id = :userId ORDER BY l.appliedAt DESC")
+List&lt;LeaveRequest&gt; findByUserIdWithDetails(@Param("userId") Long userId);</pre>
+    </div>
+
+    <div class="card">
+      <h3>2. Asynchronous Audit Client (Decoupled Background Thread)</h3>
+      <p style="margin: 0 0 6px 0; font-size: 11.5px;">Located in <code>com.company.leave.service.AuditServiceClient</code>. Dispatches fire-and-forget HTTP call without blocking:</p>
+<pre>public void logAction(Long userId, String action, Long leaveId, String details) {
+    Thread thread = new Thread(() -> {
+        try {
+            AuditLogDto payload = new AuditLogDto(userId, action, leaveId, LocalDateTime.now(), details);
+            restClient.post().uri(auditUrl).contentType(MediaType.APPLICATION_JSON)
+                      .body(payload).retrieve().toBodilessEntity();
+        } catch (Exception ex) {
+            log.warn("Audit service offline: {}", ex.getMessage());
+        }
+    });
+    thread.setDaemon(true);
+    thread.start();
+}</pre>
+    </div>
+
+    <div class="card">
+      <h3>3. Dual-Persistence Fallback in Node.js Audit Microservice</h3>
+      <p style="margin: 0 0 6px 0; font-size: 11.5px;">Located in <code>backend/audit-service/server.js</code>. Protects against database downtime:</p>
+<pre>// Attempts MongoDB insertion; if disconnected, falls back safely to local JSON file
+try {
+  if (isMongoConnected && mongoCollection) {
+    const result = await mongoCollection.insertOne({ ...logEntry });
+  }
+} catch (err) {
+  console.warn('MongoDB insert failed, using JSON file fallback:', err.message);
+}
+writeLocalLog(logEntry); // Always guarantees an on-disk audit record</pre>
+    </div>
+  </div>
+
+  <!-- SECTION 5: INTERVIEW Q&A -->
+  <div class="section">
+    <h2 class="section-title"><span class="num">5</span> 20 Essential Interview Questions & Answers</h2>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q1</span> Can you explain the overall architecture of this application?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> It is a decoupled full-stack architecture. The primary backend is built on Java 17 and Spring Boot 3 with a layered pattern (Controller, Service, Repository, DTO). It connects to MySQL 8.0 via Spring Data JPA. For non-blocking compliance tracking, we implemented a secondary Node.js/Express audit microservice backed by MongoDB and a JSON file fallback. The frontend is a responsive Single/Multi-page interface using HTML5, Bootstrap 5.3, and ES6 JavaScript that communicates with the backend via RESTful APIs and session cookies.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q2</span> Why did you use Spring Boot instead of standard Java Servlets or plain Spring?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> Spring Boot drastically reduces boilerplate configuration through auto-configuration, includes an embedded Tomcat server, and simplifies dependency management with starter POMs (`spring-boot-starter-web`, `spring-boot-starter-data-jpa`). It also provides enterprise features such as declarative transactions (`@Transactional`), Bean Validation, and centralized error handling out of the box.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q3</span> What is the Hibernate N+1 problem and how did you resolve it?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> The N+1 problem occurs when fetching an entity with lazy relationships (like `LeaveRequest` referencing `User`). Hibernate fires 1 initial query for the leave requests, plus N individual queries to fetch the associated user for each row. I resolved this by writing explicit JPQL queries with <code>JOIN FETCH l.user LEFT JOIN FETCH l.decidedBy</code> in `LeaveRepository`. This instructs Hibernate to fetch all parent and child entities in a single SQL query using SQL joins.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q4</span> How is authentication handled securely?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> We use BCrypt password hashing via Spring Security's `PasswordEncoder`. Passwords are never stored in plaintext. On successful login, the server establishes an HTTP session (`HttpSession`), storing user ID and role, and issues a `JSESSIONID` cookie to the browser. Every subsequent request passes this cookie with `credentials: 'include'`, allowing server-side role validation without passing sensitive user credentials in headers.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q5</span> How is Role-Based Access Control (RBAC) enforced?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> RBAC is enforced both on the server and on the client:
+        <br>• <strong>Backend:</strong> `LeaveController` invokes `requireRole(session, Role.ADMIN)` or `requireRole(session, Role.EMPLOYEE)`. If the session is missing or the role does not match, it throws an `UnauthorizedException` (401) or `ForbiddenException` (403).
+        <br>• <strong>Frontend:</strong> The `requireAuth(expectedRole)` guard in `auth.js` verifies the session against `/api/auth/me`. If unauthorized, it immediately redirects the browser to the appropriate login page.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q6</span> Why did you use DTOs (Data Transfer Objects) instead of returning Entities?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> Three main reasons:
+        <br>1. <strong>Security:</strong> The `User` JPA entity contains the BCrypt password hash. Returning `UserDto` ensures password hashes are never serialized over HTTP.
+        <br>2. <strong>Decoupling:</strong> Changes to the internal database schema don't break the external REST API contract.
+        <br>3. <strong>Prevent Circular References:</strong> Bidirectional JPA relationships can cause infinite recursion during Jackson JSON serialization; DTOs eliminate this risk.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q7</span> How does the application handle exceptions and error responses?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> We implemented a centralized `GlobalExceptionHandler` annotated with `@RestControllerAdvice`. It captures custom exceptions like `ResourceNotFoundException`, `ConflictException`, and validation errors (`MethodArgumentNotValidException`) and maps them to clean HTTP status codes (404, 409, 400). It returns a consistent JSON payload containing `timestamp`, `status`, `error`, and `message`.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q8</span> What is `@Transactional` and what benefits does it provide?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> `@Transactional` defines transaction boundaries around service methods. If an exception occurs during leave submission or status changes, all database modifications within the method are rolled back automatically. For read operations, `@Transactional(readOnly = true)` disables Hibernate dirty-checking, boosting query performance and reducing memory overhead.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q9</span> Why build an asynchronous audit service instead of calling it synchronously?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> Synchronous network calls to third-party services create latency bottlenecks and tight coupling. If the audit service experiences latency or downtime, a synchronous call would block the employee's request and potentially trigger a 500 Internal Server Error. By dispatching the audit call in a separate daemon thread, the primary transaction completes in milliseconds and the audit system remains completely decoupled.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q10</span> How does the Node.js audit microservice achieve fault tolerance?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> On boot, the service checks MongoDB availability with a 2-second timeout. If MongoDB is unreachable or crashes during operation, it logs a warning and stores entries in a local `audit_logs.json` file. When audit logs are requested via `/logs`, it checks MongoDB first, and if offline, reads from the local JSON file. This ensures 100% data retention even during database outages.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q11</span> What business validations did you implement for leave requests?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong>
+        <br>1. <strong>Date Logic:</strong> `toDate` must be greater than or equal to `fromDate`. Past dates are blocked on the client date pickers and checked in the service.
+        <br>2. <strong>Character Limits:</strong> Reason input is capped at 500 characters with live character counter.
+        <br>3. <strong>State Immutability:</strong> Only requests with status `PENDING` can be approved or rejected. Attempting to modify an already `APPROVED` or `REJECTED` leave throws a `ConflictException` (409 Conflict).
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q12</span> How does the Admin Rejection feedback loop work?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> When an Admin rejects a leave, a Bootstrap modal collects a customized rejection reason. The frontend calls `PUT /api/leaves/{id}/reject` with the reason in the request body. The service persists this reason in the `rejection_reason` column in MySQL and records it in the audit log. In the Employee portal, the Leave History table renders a highlighted feedback badge containing the admin's exact response.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q13</span> How did you configure CORS and handle session cookies between ports?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> Because the frontend runs on port 3000 and the backend on port 8080, CORS was configured in `WebConfig.java` by implementing `WebMvcConfigurer`. We specified `.allowedOriginPatterns("http://localhost:*")` and crucially enabled `.allowCredentials(true)`. In frontend fetch requests (`api.js`), we included `credentials: 'include'`. This enables the browser to send and receive the `JSESSIONID` cookie across different ports.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q14</span> How would you scale this application to 100,000 active employees?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong>
+        <br>1. <strong>Distributed Session Store:</strong> Migrate from local in-memory `HttpSession` to <strong>Spring Session with Redis</strong> so backend instances can scale horizontally behind an NGINX load balancer.
+        <br>2. <strong>Event Message Broker:</strong> Replace the thread-based HTTP audit call with <strong>RabbitMQ or Apache Kafka</strong> for guaranteed delivery, message queuing, and replayability.
+        <br>3. <strong>Database Optimization:</strong> Create composite indexes on `(user_id, status)` and `(applied_at)` in MySQL, and implement Read Replicas for reporting queries.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q15</span> What was the most challenging technical bug you solved?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> Session cookie loss across origins during local development. Initially, API calls succeeded, but each subsequent call created a new session because `JSESSIONID` was rejected by the browser. I diagnosed that using wildcard `allowedOrigins("*")` alongside `allowCredentials(true)` is prohibited by modern CORS security standards. Resolving this required configuring explicit origin patterns (`allowedOriginPatterns`) on the backend and setting `credentials: 'include'` on the frontend fetch client.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q16</span> What are the differences between `@RestController` and `@Controller`?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> `@Controller` is standard Spring MVC designed to return HTML view names resolved by a View Resolver (like Thymeleaf). `@RestController` is a convenience annotation that combines `@Controller` and `@ResponseBody`. It automatically serializes return values directly into JSON or XML in the HTTP response body, which is standard for RESTful APIs.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q17</span> What HTTP status codes do your APIs return?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong>
+        <br>• <strong>200 OK:</strong> Successful retrieval or update.
+        <br>• <strong>201 Created:</strong> Successful leave submission.
+        <br>• <strong>400 Bad Request:</strong> Validation failure (e.g., end date before start date).
+        <br>• <strong>401 Unauthorized:</strong> Missing or expired session.
+        <br>• <strong>403 Forbidden:</strong> Valid session but insufficient role privilege (e.g., employee accessing admin endpoint).
+        <br>• <strong>404 Not Found:</strong> Leave request or user not found.
+        <br>• <strong>409 Conflict:</strong> Attempting to approve/reject an already decided leave.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q18</span> What is Bean Validation and where did you use it?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> Bean Validation (Jakarta Validation) provides declarative constraints on Java fields. In `LeaveApplyRequest` and `LoginRequest`, I used annotations like `@NotBlank`, `@NotNull`, and `@Email`. The controller method arguments are marked with `@Valid`. If constraints are violated, Spring automatically throws `MethodArgumentNotValidException`, which our `GlobalExceptionHandler` formats into user-friendly field-level error messages.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q19</span> Why did you build the UI with Vanilla ES6 instead of React or Angular?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> For an internal enterprise dashboard of this scope, Vanilla ES6 JavaScript provides maximum performance, zero build dependencies, rapid deployment, and minimal client-side memory footprint. By structuring the frontend into modular controllers (`api.js`, `auth.js`, `ui.js`), we achieved clean separation of concerns without the overhead of heavy framework compilation pipelines.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question"><span class="qa-qbadge">Q20</span> If an employee bypasses the UI and hits the Approve endpoint directly with Postman, what happens?</div>
+      <div class="qa-answer">
+        <strong>Answer:</strong> The request fails with HTTP 403 Forbidden. The backend endpoint executes `requireRole(session, Role.ADMIN)` before any business logic runs. Because the user's active session is assigned to `EMPLOYEE`, the system halts execution immediately. All security rules are strictly enforced at the backend controller and service layers, never solely on the frontend.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 6: QUICK RECALL CHEAT SHEET -->
+  <div class="section" style="page-break-inside: avoid;">
+    <h2 class="section-title"><span class="num">6</span> Quick Recall Cheat Sheet & Final Interview Tips</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Ports & Services</h3>
+        <p style="margin: 0; font-size: 11.5px;">
+          • <strong>Frontend:</strong> Port 3000 (Node static server)<br>
+          • <strong>Spring Boot:</strong> Port 8080 (Base: <code>/api</code>)<br>
+          • <strong>Audit Microservice:</strong> Port 5000 (<code>/log</code>, <code>/logs</code>)<br>
+          • <strong>MySQL Database:</strong> Port 3306 (<code>leave_management</code>)
+        </p>
+      </div>
+      <div class="card">
+        <h3>Default Demo Accounts</h3>
+        <p style="margin: 0; font-size: 11.5px;">
+          • <strong>Admin:</strong> <code>adminajay@gmail.com</code> / <code>ajay 1234</code><br>
+          • <strong>Employee:</strong> <code>ajaydeveloper@gmail.com</code> / <code>ajay1234</code><br>
+          • Both stored as secure BCrypt hashes in MySQL.
+        </p>
+      </div>
+    </div>
+
+    <div class="card card-highlight">
+      <h3>Key Words to Drop in Tomorrow's Interview</h3>
+      <p style="margin: 0; font-size: 12px;">
+        <strong>"Separation of Concerns"</strong> • 
+        <strong>"Hibernate N+1 Query Prevention"</strong> • 
+        <strong>"JPQL JOIN FETCH"</strong> • 
+        <strong>"BCrypt Hashing with Salt"</strong> • 
+        <strong>"Role-Based Access Control (RBAC)"</strong> • 
+        <strong>"DTO Data Masking"</strong> • 
+        <strong>"Asynchronous Non-Blocking Execution"</strong> • 
+        <strong>"Graceful Degradation / Fault Tolerance"</strong> • 
+        <strong>"ACID Compliance & @Transactional"</strong>
+      </p>
+    </div>
+
+    <div class="footer">
+      Leave Management & Approval System &bull; Technical Interview & Architecture Master Guide &bull; Designed for Full-Stack Excellence
+    </div>
+  </div>
+
+</body>
+</html>

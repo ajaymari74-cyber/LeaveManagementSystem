@@ -1,0 +1,21 @@
+{
+  "name": "leave-management-system",
+  "version": "1.0.0",
+  "description": "Full-stack Leave Management & Approval System (Spring Boot + Node.js + MySQL + Vanilla Web)",
+  "scripts": {
+    "start:frontend": "node frontend/server.js",
+    "start:audit": "node backend/audit-service/server.js",
+    "start:backend": "powershell -Command \"cd 'backend/spring-boot'; .\\mvnw.cmd spring-boot:run\"",
+    "check": "powershell -ExecutionPolicy Bypass -File ./scripts/check-services.ps1",
+    "start": "powershell -ExecutionPolicy Bypass -File ./scripts/start-all.ps1"
+  },
+  "keywords": [
+    "leave-management",
+    "spring-boot",
+    "mysql",
+    "audit-microservice",
+    "bootstrap5"
+  ],
+  "author": "Ajay",
+  "license": "MIT"
+}

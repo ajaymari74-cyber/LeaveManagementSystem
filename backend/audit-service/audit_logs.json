@@ -1,6 +1,20 @@
 [
   {
     "userId": 5,
+    "action": "LEAVE_APPROVED",
+    "leaveId": 7,
+    "timestamp": "2026-10-13T03:34:31.231Z",
+    "details": "Approved by admin Ajay Admin"
+  },
+  {
+    "userId": 6,
+    "action": "LEAVE_APPLIED",
+    "leaveId": 7,
+    "timestamp": "2026-10-13T03:34:30.908Z",
+    "details": "Applied for CASUAL leave from 2026-11-01 to 2026-11-03"
+  },
+  {
+    "userId": 5,
     "action": "LEAVE_REJECTED",
     "leaveId": 6,
     "timestamp": "2026-10-08T13:12:41.420Z",

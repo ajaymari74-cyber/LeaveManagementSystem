@@ -1,0 +1,303 @@
+{
+  "info": {
+    "_postman_id": "8f3b1740-4bc3-487e-911a-leave-mgmt-collection",
+    "name": "Leave Management & Approval System API",
+    "description": "Comprehensive Postman test collection covering all positive and negative scenarios for the Leave Management System REST APIs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api",
+      "type": "string"
+    },
+    {
+      "key": "auditUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "1.1 Employee Login (Valid)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@company.com\",\n  \"password\": \"emp123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "1.2 Admin Login (Valid)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@company.com\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "1.3 Login Invalid Password (401 Negative)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@company.com\",\n  \"password\": \"wrongpass\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "1.4 Get Current User Session (/me)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        },
+        {
+          "name": "1.5 Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Employee Leave Operations",
+      "item": [
+        {
+          "name": "2.1 Submit Leave Request (Success 201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"leaveType\": \"CASUAL\",\n  \"fromDate\": \"2026-11-01\",\n  \"toDate\": \"2026-11-03\",\n  \"reason\": \"Family wedding ceremony\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/leaves",
+              "host": ["{{baseUrl}}"],
+              "path": ["leaves"]
+            }
+          }
+        },
+        {
+          "name": "2.2 Submit Leave ToDate Earlier Than FromDate (400 Negative)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"leaveType\": \"CASUAL\",\n  \"fromDate\": \"2026-11-05\",\n  \"toDate\": \"2026-11-01\",\n  \"reason\": \"Invalid date range test\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/leaves",
+              "host": ["{{baseUrl}}"],
+              "path": ["leaves"]
+            }
+          }
+        },
+        {
+          "name": "2.3 Submit Leave Missing Reason (400 Negative)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"leaveType\": \"SICK\",\n  \"fromDate\": \"2026-11-01\",\n  \"toDate\": \"2026-11-02\",\n  \"reason\": \"\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/leaves",
+              "host": ["{{baseUrl}}"],
+              "path": ["leaves"]
+            }
+          }
+        },
+        {
+          "name": "2.4 Get My Leaves History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/leaves/my",
+              "host": ["{{baseUrl}}"],
+              "path": ["leaves", "my"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Admin Leave Management",
+      "item": [
+        {
+          "name": "3.1 Get All Leave Requests",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/leaves",
+              "host": ["{{baseUrl}}"],
+              "path": ["leaves"]
+            }
+          }
+        },
+        {
+          "name": "3.2 Filter Leaves By Status (PENDING)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/leaves?status=PENDING",
+              "host": ["{{baseUrl}}"],
+              "path": ["leaves"],
+              "query": [
+                { "key": "status", "value": "PENDING" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "3.3 Get Single Leave Details (ID: 1)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/leaves/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["leaves", "1"]
+            }
+          }
+        },
+        {
+          "name": "3.4 Approve Pending Leave Request",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/leaves/1/approve",
+              "host": ["{{baseUrl}}"],
+              "path": ["leaves", "1", "approve"]
+            }
+          }
+        },
+        {
+          "name": "3.5 Approve Already Decided Leave (409 Conflict Negative)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/leaves/1/approve",
+              "host": ["{{baseUrl}}"],
+              "path": ["leaves", "1", "approve"]
+            }
+          }
+        },
+        {
+          "name": "3.6 Reject Pending Leave Request",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/leaves/2/reject",
+              "host": ["{{baseUrl}}"],
+              "path": ["leaves", "2", "reject"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Node.js Audit Log Service",
+      "item": [
+        {
+          "name": "4.1 Service Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{auditUrl}}/health",
+              "host": ["{{auditUrl}}"],
+              "path": ["health"]
+            }
+          }
+        },
+        {
+          "name": "4.2 Get All Audit Logs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{auditUrl}}/logs",
+              "host": ["{{auditUrl}}"],
+              "path": ["logs"]
+            }
+          }
+        },
+        {
+          "name": "4.3 Post Direct Audit Log",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"action\": \"MANUAL_AUDIT_TEST\",\n  \"leaveId\": 999,\n  \"details\": \"Direct audit service test invocation\"\n}"
+            },
+            "url": {
+              "raw": "{{auditUrl}}/log",
+              "host": ["{{auditUrl}}"],
+              "path": ["log"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
