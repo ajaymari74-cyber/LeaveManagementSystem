@@ -1,33 +1,38 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "services": {
-    "audit-service": {
-      "root": "backend/audit-service",
-      "framework": "express"
-    },
-    "frontend": {
-      "root": "frontend",
-      "runtime": "node"
-    }
-  },
+  "version": 2,
+  "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/env.js",
+      "destination": "/api/env"
+    },
+    {
+      "source": "/config.js",
+      "destination": "/api/env"
+    },
+    {
       "source": "/audit/(.*)",
-      "destination": {
-        "service": "audit-service"
-      }
+      "destination": "/api/audit"
     },
     {
       "source": "/audit",
-      "destination": {
-        "service": "audit-service"
-      }
+      "destination": "/api/audit"
+    },
+    {
+      "source": "/api/audit/(.*)",
+      "destination": "/api/audit"
+    },
+    {
+      "source": "/api/audit",
+      "destination": "/api/audit"
+    },
+    {
+      "source": "/frontend/(.*)",
+      "destination": "/frontend/$1"
     },
     {
       "source": "/(.*)",
-      "destination": {
-        "service": "frontend"
-      }
+      "destination": "/frontend/$1"
     }
   ]
 }

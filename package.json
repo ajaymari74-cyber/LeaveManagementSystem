@@ -9,6 +9,11 @@
     "check": "powershell -ExecutionPolicy Bypass -File ./scripts/check-services.ps1",
     "start": "powershell -ExecutionPolicy Bypass -File ./scripts/start-all.ps1"
   },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0"
+  },
   "keywords": [
     "leave-management",
     "spring-boot",

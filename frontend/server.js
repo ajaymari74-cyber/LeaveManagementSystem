@@ -51,8 +51,10 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log(`Frontend static server running on http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  server.listen(PORT, () => {
+    console.log(`Frontend static server running on http://localhost:${PORT}`);
+  });
+}
 
 module.exports = server;

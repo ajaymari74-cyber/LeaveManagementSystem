@@ -57,8 +57,18 @@ function writeLocalLog(entry) {
   }
 }
 
+// Root info endpoint
+app.get(['/', '/audit', '/api/audit'], (req, res) => {
+  res.json({
+    service: 'Leave Management Audit Microservice',
+    status: 'UP',
+    mongoConnected: isMongoConnected,
+    timestamp: new Date()
+  });
+});
+
 // POST /log & /audit/log — Primary audit logging endpoint
-app.post(['/log', '/audit/log'], async (req, res) => {
+app.post(['/log', '/audit/log', '/api/audit/log', '/api/log'], async (req, res) => {
   const { userId, action, leaveId, timestamp, details } = req.body;
 
   if (!userId || !action || !leaveId) {
@@ -90,7 +100,7 @@ app.post(['/log', '/audit/log'], async (req, res) => {
 });
 
 // GET /logs & /audit/logs — Retrieve all audit logs
-app.get(['/logs', '/audit/logs'], async (req, res) => {
+app.get(['/logs', '/audit/logs', '/api/audit/logs', '/api/logs'], async (req, res) => {
   try {
     if (isMongoConnected && mongoCollection) {
       const logs = await mongoCollection.find().sort({ timestamp: -1 }).toArray();
@@ -103,7 +113,7 @@ app.get(['/logs', '/audit/logs'], async (req, res) => {
 });
 
 // GET /logs/:leaveId & /audit/logs/:leaveId — Filter logs by leave ID
-app.get(['/logs/:leaveId', '/audit/logs/:leaveId'], async (req, res) => {
+app.get(['/logs/:leaveId', '/audit/logs/:leaveId', '/api/audit/logs/:leaveId', '/api/logs/:leaveId'], async (req, res) => {
   const leaveId = Number(req.params.leaveId);
   try {
     if (isMongoConnected && mongoCollection) {
@@ -118,7 +128,7 @@ app.get(['/logs/:leaveId', '/audit/logs/:leaveId'], async (req, res) => {
 });
 
 // GET /health & /audit/health
-app.get(['/health', '/audit/health'], (req, res) => {
+app.get(['/health', '/audit/health', '/api/audit/health', '/api/health'], (req, res) => {
   res.json({
     status: 'UP',
     mongoConnected: isMongoConnected,
@@ -126,7 +136,7 @@ app.get(['/health', '/audit/health'], (req, res) => {
   });
 });
 
-if (process.env.NODE_ENV !== 'test') {
+if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`Audit log service running on http://localhost:${PORT}`);
   });
